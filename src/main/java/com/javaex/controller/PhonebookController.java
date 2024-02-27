@@ -104,7 +104,7 @@ public class PhonebookController {
 		}
 		//삭제
 		@RequestMapping(value="/phone/delete", method= {RequestMethod.GET, RequestMethod.POST})
-		private String delete(@RequestParam("no") int no) { // valeu안쓰고 가져와도됨 설명듣기 11:09
+		private String delete(@RequestParam("no") int no) { // value안쓰고 가져와도됨 설명듣기 11:09
 			System.out.println("PhonebookController.delete()");
 			
 			//서비스
