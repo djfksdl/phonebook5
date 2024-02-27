@@ -30,7 +30,7 @@
 		</div>
 
 		<!--<input type="text" name="action" value="insert"><br>-->
-		<!-- 이제insert라는 업무 구분이 필요없어짐. 위에 form에서 write로 써줌 -->
+		<!-- 이제insert라는 업무 구분이 필요없어짐. 위에 form에서 write로 써준게 주소로 구분이 된다. -->
 		<button type="submit">등록</button>
 
 

@@ -26,14 +26,14 @@ public class PhonebookController {
 	//메소드-일반
 	
 	//등록폼
-	//localhost:8080/phonebook5(여기까진 공통주소)/phone/writeform
-	@RequestMapping(value="/phone/writeform" ,method={RequestMethod.GET , RequestMethod.POST } )//get으로 실행시켜줘야한다. 하나만 쓰면 method= RequestMethod.GET으로 쓴다.지금은 연습하느라 두개 다 하는걸로 써놓음/ 이거 쓰는 이유는 매핑시키려고?? 2:54
+	//localhost:8080/phonebook5(여기까진 공통주소)/phone/writeform - 이런 주소가 왔을때 밑에 있는 메소드가 작동했으면 좋겠다.
+	@RequestMapping(value="/phone/writeform" ,method={RequestMethod.GET , RequestMethod.POST } )//get으로 실행시켜줘야한다. 하나만 쓰면 method= RequestMethod.GET으로 쓴다.지금은 연습하느라 두개 다 하는걸로 써놓음/ 이거 쓰는 이유는 매핑에 등록시키려고 쓰는거임!
 	public String writeForm() {
 		System.out.println("PhonebookController.writeForm()");
 //		return "/WEB-INF/views/writeForm.jsp"; //신한테 알려주는 역할을 함. /이건 포워드 하는 문법 
 		return "writeForm";//'뷰' 를 추가해줘서 앞뒤에 붙은 건 빼줘야 주소가 제대로 찾아감
 	}
-	//등록2
+	//등록2- 갯수 많으면 실수할 수 있으니 파라미터 묶어서'까지 줘-> PersonVo에 담는것까지는 알려줘야함. 꺼내서 묶어서 나한테 줘. 자료형(PserconVo)에 담고 이름을 알려줘야 꺼내 쓸 수 있으니 personVo로 이름을 주면 디스패쳐가 new해줌.
 	@RequestMapping(value="/phone/write2" ,method={RequestMethod.GET , RequestMethod.POST } )
 	//localhost:8080/phonebook5/phone/write?name=황일영&hp=010&company=02
 	public String write(@ModelAttribute PersonVo personVo)  {
@@ -60,7 +60,7 @@ public class PhonebookController {
 	//등록1
 	@RequestMapping(value="/phone/write" ,method={RequestMethod.GET , RequestMethod.POST } )
 	//localhost:8080/phonebook5/phone/write?name=황일영&hp=010&company=02
-	public String write(@RequestParam(value="name") String name,
+	public String write(@RequestParam(value="name") String name, //Request안에 있는 name에 있는값을 꺼내서 넣어달라고 써놓음. 그래서 디스패쳐가 일함
 					  @RequestParam(value="hp") String hp,
 					  @RequestParam(value="company") String company )  {
 		System.out.println("PhonebookController.write1()");
