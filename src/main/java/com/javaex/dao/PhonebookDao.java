@@ -1,13 +1,15 @@
 package com.javaex.dao;
 
 import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.sql.DataSource;
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.javaex.vo.PersonVo;
@@ -15,14 +17,20 @@ import com.javaex.vo.PersonVo;
 @Repository
 public class PhonebookDao {
 
+		
+//mybitis없을때!
 	// 필드
 	private Connection conn = null;
 	private PreparedStatement pstmt = null;
 	private ResultSet rs = null;
-	private String driver = "com.mysql.cj.jdbc.Driver";
-	private String url = "jdbc:mysql://localhost:3306/phone_db";
-	private String id = "phone";
-	private String pw = "phone";
+	//pool 설치후 지우기 -> 이 역할을 하는걸 설치해줬으니 쓸모없어짐.
+//	private String driver = "com.mysql.cj.jdbc.Driver";
+//	private String url = "jdbc:mysql://localhost:3306/phone_db";
+//	private String id = "phone";
+//	private String pw = "phone";
+	
+	@Autowired
+	private DataSource dataSource;//여기안에 메소드가 만들어져있는거임
 
 	// 생성자
 	// 메소드-gs
@@ -32,23 +40,25 @@ public class PhonebookDao {
 	// 연결
 	public void getConnection() {
 		try {
-			// 1. JDBC 드라이버 (Oracle) 로딩
-			Class.forName(driver);
+			// 1. JDBC 드라이버 (Oracle) 로딩 -> 라이브러리가 불러올거임.
+			//Class.forName(driver);
 
 			// 2. Connection 얻어오기
-			conn = DriverManager.getConnection(url, id, pw);
-
-		} catch (ClassNotFoundException e) {
-			System.out.println("error: 드라이버 로딩 실패 - " + e);
-
-		} catch (SQLException e) {
+//			conn = DriverManager.getConnection(url, id, pw);
+			conn = dataSource.getConnection();//비어있는거 알아서 연결해주는 역할
+		}
+//		 catch (ClassNotFoundException e) {
+//			System.out.println("error: 드라이버 로딩 실패 - " + e);
+//
+//		} 이것도 커넥션 관련이라 지워주기
+		catch (SQLException e) {
 			System.out.println("error:" + e);
 
 		}
 	}
 
 	// 종료
-	public void close() {
+	public void close() {//Dao와 DataSource는 같은 공간에 있고 연결이 끊겼다 연결됨. DB는 외부에 있는거고 진짜로 끊어지진않음.
 		// 5. 자원정리
 		try {
 			if (rs != null) {
