@@ -55,7 +55,7 @@ public class PhonebookController {
 //		phonsbookDao.personInsert(personVo);
 		
 		//리스트로 리다이렉트
-		return "redirect:/phone/list";
+		return "redirect:/phone/list";//그냥 ""안에 문자 쓰면 jsp파일을 찾아가는데 redirect:인터넷 주소 써주면 리다이렉트 됨
 	}
 	//등록1
 	@RequestMapping(value="/phone/write" ,method={RequestMethod.GET , RequestMethod.POST } )
@@ -85,7 +85,7 @@ public class PhonebookController {
 	//리스트
 		@RequestMapping(value="/phone/list" ,method={RequestMethod.GET , RequestMethod.POST } )
 		//localhost:8080/phonebook5/phone/write?name=황일영&hp=010&company=02
-		private String list(Model model) {//Model에서attribute에 담아야할때만 써준다. model은 데이터고, view는 화면이다.
+		private String list(Model model) {//Model이라는 박스에에 담아서 attribute에 보내야할때 써준다. model에 담는 전용메소드가 있다.(.addAttribute())
 			System.out.println("PhonebookController.list()");
 			
 			//서비스를 메모리에 올리고 서비스의 메소드 사용해야함!(3단계)

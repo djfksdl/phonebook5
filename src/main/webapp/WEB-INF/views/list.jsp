@@ -15,7 +15,7 @@
 
 	<p>등록된 전화번호 리스트입니다.</p>
 	<c:forEach items="${pList}" var="personVo">
-	<!-- requestScope.pList이다. : attribute쪽에 있는거? -->
+	<!-- requestScope.pList이다. : attribute쪽에 있는거! -->
 		<table border="1">
 			<tr>
 				<th>이름(name)</th>
