@@ -118,7 +118,7 @@ public class PhonebookController {
 		}
 		//수정
 		@RequestMapping(value="/phone/modify", method= {RequestMethod.GET, RequestMethod.POST})
-		private String modify(@ModelAttribute PersonVo personVo) {//dispatcherservlet이 new해서 gs를 생성함 ?gs생성함확인10:49/여러가지 담아오는거라 모델로 써줌
+		private String modify(@ModelAttribute PersonVo personVo) {//dispatcherservlet이 new해서 디폴트 생성자 만들어서 파라미터에 있는 값을 setter로 넣어준다./여러가지 담아오는거라 모델어트리뷰트로 써줌
 			System.out.println("PhonebookController.modify()");
 			
 //			System.out.println(personVo);
